@@ -1,0 +1,32 @@
+# Configuration for Julia quadratic matrix equation example
+
+max_iterations: 50
+checkpoint_interval: 10
+log_level: "INFO"
+
+llm:
+  primary_model: "gemini-2.5-flash-lite-preview-06-17"
+  primary_model_weight: 1.0
+  api_base: "https://generativelanguage.googleapis.com/v1beta/openai/"
+  temperature: 0.7
+  max_tokens: 4096
+
+prompt:
+  num_top_programs: 3
+  num_diverse_programs: 2
+  include_artifacts: true
+  max_artifact_bytes: 4096
+
+# Feature dimensions for MAP-Elites
+database:
+  population_size: 50
+  num_islands: 3
+  feature_dimensions:
+    - "score"
+    - "execution_time"
+    - "allocations"
+  feature_bins: 5
+
+evaluator:
+  timeout: 30
+  parallel_evaluations: 1
