@@ -1,0 +1,2 @@
+# Python requirements for the Julia example
+typing-extensions
