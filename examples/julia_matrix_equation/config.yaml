@@ -1,0 +1,70 @@
+# Configuration for Julia quadratic matrix equation example
+max_iterations: 200
+checkpoint_interval: 10
+log_level: "INFO"
+
+llm:
+  primary_model: "gemini-2.5-flash-lite-preview-06-17"
+  primary_model_weight: 0.6
+  secondary_model: "gemini-2.0-flash-lite"
+  secondary_model_weight: 0.4
+  api_base: "https://generativelanguage.googleapis.com/v1beta/openai/"
+  api_key:
+
+  # primary_model: "qwen2.5-coder:3b" #
+  # # primary_model: "deepseek-r1:1.5b"
+  # primary_model_weight: 0.6
+  # # secondary_model: "mathstral" 
+  # # secondary_model: "codellama"
+  # secondary_model: "codegemma:2b"
+  # secondary_model_weight: 0.4
+  # api_base: "http://localhost:11434/v1" # Together AI endpoint
+  # api_key: ollama
+
+  # primary_model: "deepseek-ai/DeepSeek-R1-Distill-Llama-70B-free"
+  # primary_model_weight: 0.6
+  # secondary_model: "deepseek-ai/DeepSeek-R1-0528"
+  # secondary_model_weight: 0.4
+  # api_base: "https://api.together.xyz/v1" # Together AI endpoint
+  # api_key: 
+  # temperature: 0.6
+  # top_p: 0.95
+  max_tokens: 28000
+  timeout: 900
+
+prompt:
+  system_message: |
+    You are an expert Julia programmer specializing in numerical linear algebra.
+    Focus on optimizing the solve_quadratic_matrix_equation function inside the
+    EVOLVE-BLOCK to reduce execution time and memory allocations while achieving
+    a residual below 1e-14.
+  num_top_programs: 3
+  num_diverse_programs: 2
+
+  # Template stochasticity
+  use_template_stochasticity: true # Use random variations in templates for diversity
+  template_variations:
+    # Different phrasings for parts of the template
+    improvement_suggestion:
+    - "Consider implementing buffers"
+    - "Use other libraries, like SpeedMapping, LinearSolve and the like to try and speed up the algorithm"
+    - "Consider other algorithm like e.g. doubling"
+    - "Think of other ways in getting reliable and fast solutions"
+
+database:
+  population_size: 20
+  num_islands: 3
+  elite_selection_ratio: 0.3
+  exploitation_ratio: 0.65
+  exploration_ratio: 0.35
+  feature_dimensions:
+  - "combined_score"
+
+evaluator:
+  timeout: 30
+  cascade_evaluation: false
+  parallel_evaluations: 1
+
+# Evolution settings
+diff_based_evolution: true
+allow_full_rewrites: true
