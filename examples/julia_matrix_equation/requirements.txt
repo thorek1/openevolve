@@ -1,0 +1,3 @@
+# Python requirements for the evaluator
+# No external packages required
+# Julia 1.9+ must be installed separately

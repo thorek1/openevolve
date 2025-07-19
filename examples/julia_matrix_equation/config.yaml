@@ -1,0 +1,35 @@
+# Configuration for Julia quadratic matrix equation example
+max_iterations: 50
+checkpoint_interval: 10
+log_level: "INFO"
+
+llm:
+  primary_model: "gemini-2.0-flash"
+  primary_model_weight: 0.6
+  secondary_model: "gemini-2.5-flash-preview-05-20"
+  secondary_model_weight: 0.4
+  api_base: "https://generativelanguage.googleapis.com/v1beta/openai/"
+  api_key: YOUR_API_KEY
+  temperature: 0.7
+  max_tokens: 1024
+
+prompt:
+  system_message: |
+    You are an expert Julia programmer specializing in numerical linear algebra.
+    Focus on optimizing the solve_quadratic_matrix_equation function inside the
+    EVOLVE-BLOCK to reduce execution time and memory allocations while achieving
+    a residual below 1e-14.
+  num_top_programs: 3
+
+database:
+  population_size: 20
+  num_islands: 2
+  feature_dimensions:
+    - "combined_score"
+
+evaluator:
+  timeout: 30
+  cascade_evaluation: false
+  parallel_evaluations: 1
+
+diff_based_evolution: true
