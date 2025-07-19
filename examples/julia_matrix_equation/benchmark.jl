@@ -21,7 +21,7 @@ function run_benchmark()
     alloc = trial.allocs
     mem = trial.memory
     X, iters = solve_quadratic_matrix_equation(A, B, C)
-    residual = norm(A * X * X + B * X + C)
+    residual = log10(norm(A * X * X + B * X + C))
 
     return Dict(
         "memory" => mem,

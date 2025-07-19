@@ -23,7 +23,9 @@ def evaluate(program_path: str):
             time_val = metrics.get("time", 1.0)
             alloc = metrics.get("allocations", 0.0)
             memory = metrics.get("memory", 0.0)
-            metrics["combined_score"] = 1e6 / (time_val + alloc * 100 + memory)
+            min_obj = time_val + alloc * 100 + memory
+            min_obj = min_obj if min_obj > 0 else 1e12
+            metrics["combined_score"] = 1e6 / min_obj
 
         return metrics
     except Exception as e:
