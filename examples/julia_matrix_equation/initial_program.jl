@@ -1,5 +1,3 @@
-using LinearAlgebra
-
 # EVOLVE-BLOCK-START
 function solve_quadratic_matrix_equation(
     A::AbstractMatrix{T},

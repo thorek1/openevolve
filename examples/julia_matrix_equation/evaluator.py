@@ -22,7 +22,8 @@ def evaluate(program_path: str):
         else:
             time_val = metrics.get("time", 1.0)
             alloc = metrics.get("allocations", 0.0)
-            metrics["combined_score"] = 1.0 / (time_val + alloc / 1e6 + 1e-12)
+            memory = metrics.get("memory", 0.0)
+            metrics["combined_score"] = 1e6 / (time_val + alloc * 100 + memory)
 
         return metrics
     except Exception as e:
